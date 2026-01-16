@@ -1,6 +1,6 @@
 [build]
-  publish = "dist"
-  command = "npm run build"
+  publish = "public"      ← biarkan Netlify serve folder public
+  command = "# noop"      ← tidak perlu build apa-apa
 
 [[redirects]]
   from = "/*"
