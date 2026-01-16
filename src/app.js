@@ -116,6 +116,37 @@ function setupAuthEventListeners() {
     if (refreshTasks) {
         refreshTasks.addEventListener('click', () => app.taskView.refresh());
     }
+
+    // ============================================
+    // UI IMPROVEMENTS - Day 4
+    // ============================================
+    
+    // Add loading state untuk buttons
+    document.addEventListener('click', (e) => {
+        if (e.target.matches('.btn') && !e.target.classList.contains('loading')) {
+            // Add loading class
+            e.target.classList.add('loading');
+            
+            // Remove after action completes
+            setTimeout(() => {
+                e.target.classList.remove('loading');
+            }, 500);
+        }
+    });
+    
+    // Add smooth scroll untuk anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
 }
 
 /**
@@ -151,6 +182,8 @@ function handleLogin() {
     } else {
         showMessage(response.error, 'error');
     }
+
+
 }
 
 /**
