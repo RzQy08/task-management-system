@@ -1,6 +1,6 @@
 [build]
-  publish = "public"      ← biarkan Netlify serve folder public
-  command = "# noop"      ← tidak perlu build apa-apa
+  publish = "public"     
+  command = "# noop"      
 
 [[redirects]]
   from = "/*"
