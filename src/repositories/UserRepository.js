@@ -1,4 +1,18 @@
-const User = require('../models/User');
+
+// Deteksi environment dulu
+const isNode = typeof module !== 'undefined' && module.exports;
+
+// Load dependencies berdasarkan environment
+let User;
+if (isNode) {
+    User = require('../models/User');
+} else {
+    // Untuk browser, diasumsikan User sudah tersedia di global scope
+    // atau di-load oleh script lain
+    User = window.User || (() => {
+        throw new Error('User class not available in browser');
+    })();
+}
 
 class UserRepository {
     constructor(storageManager) {
@@ -249,9 +263,10 @@ class UserRepository {
     }
 }
 
-// Export untuk digunakan di file lain
-if (typeof module !== 'undefined' && module.exports) {
+// Export/attach berdasarkan environment
+if (isNode) {
     module.exports = UserRepository;
 } else {
+    // Untuk browser, attach ke global/window
     window.UserRepository = UserRepository;
 }

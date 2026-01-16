@@ -1,4 +1,16 @@
-const EnhancedTask = require('../models/EnhancedTask');
+// Deteksi environment
+const isNode = typeof module !== 'undefined' && module.exports;
+
+// Load dependencies berdasarkan environment
+let EnhancedTask;
+if (isNode) {
+    EnhancedTask = require('../models/EnhancedTask');
+} else {
+    // Untuk browser, diasumsikan EnhancedTask sudah tersedia
+    EnhancedTask = window.EnhancedTask || (() => {
+        throw new Error('EnhancedTask class not available in browser');
+    })();
+}
 
 class TaskRepository {
     constructor(storageManager) {
@@ -377,9 +389,10 @@ class TaskRepository {
     }
 }
 
-// Export untuk digunakan di file lain
-if (typeof module !== 'undefined' && module.exports) {
+// Export/attach berdasarkan environment
+if (isNode) {
     module.exports = TaskRepository;
 } else {
+    // Untuk browser, attach ke global/window
     window.TaskRepository = TaskRepository;
 }
