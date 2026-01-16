@@ -1,6 +1,6 @@
 [build]
-  base = "client/"
-  publish = "dist/"
+  base = "."          # root karena package.json di sini
+  publish = "dist"    # hasil vite build
   command = "npm run build"
 
 [build.environment]
