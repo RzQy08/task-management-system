@@ -1,10 +1,6 @@
 [build]
-  base = "."          # root karena package.json di sini
-  publish = "dist"    # hasil vite build
+  publish = "dist"
   command = "npm run build"
-
-[build.environment]
-  NODE_VERSION = "18"
 
 [[redirects]]
   from = "/*"
